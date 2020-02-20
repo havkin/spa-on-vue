@@ -21,7 +21,9 @@
     <v-app-bar app dense color="primary" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon> 
 
-      <v-toolbar-title>Ad application</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" class="pointer">Ad application</router-link>
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -54,3 +56,9 @@ export default {
   })
 };
 </script>
+
+<style scoped>
+.pointer {
+  cursor: pointer;
+}
+</style>
