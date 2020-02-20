@@ -7,7 +7,7 @@
             <v-toolbar-title>Login form</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-form v-model="valid" lazy-validation>
+            <v-form v-model="valid">
               <v-text-field
                 label="Email"
                 name="email"
@@ -23,7 +23,6 @@
                 prepend-icon="mdi-lock"
                 type="password"
                 v-model="password"
-                :counter="6"
                 :rules="passwordRules"
               />
             </v-form>
@@ -50,7 +49,7 @@ export default {
     ],
     passwordRules: [
       v => !!v || "Password is required",
-      v => v.length >= 6 || "Password must be not less than 6 characters"
+      // v => v.length >= 6 || "Password must be not less than 6 characters"
     ]
   }),
   methods: {
