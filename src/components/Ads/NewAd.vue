@@ -56,11 +56,13 @@ export default {
   methods: {
     createAd() {
       if (this.valid) {
-        const ad = {
+        const newAd = {
           title: this.title,
           description: this.description,
-          promo: this.promo
+          promo: this.promo,
+          img: "http://placeimg.com/640/480/any"
         };
+        this.$store.dispatch('createAd', newAd)
       }
     }
   }

@@ -5,7 +5,7 @@ export default ({
            title: "Firsr ad",
            description: "Firsr ad",
            promo: false,
-           img: " https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
+           img: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
            id: 1
          },
          {
@@ -32,8 +32,15 @@ export default ({
        ]
    },
    mutations: {
+      createAd (state, payload) {
+         state.ads.push(payload);
+      }
    },
    actions: {
+      createAd ({commit}, payload) {
+         payload.id = Math.random();
+         commit('createAd', payload);
+      }
    },
    getters: {
       ads (state) {
@@ -45,5 +52,8 @@ export default ({
       myAds (state) {
          return state.ads;
       },
+      adById (state) {
+         return adId => state.ads.find( ad => ad.id.toString() === adId );
+      }
    }
  });
