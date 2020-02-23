@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col xs="12" sm="6" offset-sm="3">
+      <v-col cols="12" sm="6" offset-sm="3">
         <h1 class="text--secondary mb-3">Create new ad</h1>
         <v-form v-model="valid">
           <v-text-field

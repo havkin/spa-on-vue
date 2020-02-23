@@ -18,7 +18,7 @@
     </v-container>
     <v-container>
       <v-row>
-        <v-col v-for="item in ads" :key="item.id" xs="12" lg="4">
+        <v-col v-for="item in ads" :key="item.id" cols="12" lg="4">
           <v-card class="mx-auto" max-width="400">
             <v-img class="white--text align-end" height="200px" :src="item.img"></v-img>
             <v-card-title>{{item.title}}</v-card-title>
@@ -41,38 +41,40 @@
 
 <script>
 export default {
-  data: () => ({
-    ads: [
-      {
-        title: "Firsr ad",
-        description: "Firsr ad",
-        promo: false,
-        img: " https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
-        id: 1
-      },
-      {
-        title: "Second ad",
-        description: "Second ad",
-        promo: true,
-        img: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
-        id: 2
-      },
-      {
-        title: "Third ad",
-        description: "Third ad",
-        promo: true,
-        img: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
-        id: 3
-      },
-      {
-        title: "ad",
-        description: "ad",
-        promo: true,
-        img: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
-        id: 5
-      }
-    ]
-  })
+  data() {
+    return {
+      ads: [
+        {
+          title: "Firsr ad",
+          description: "Firsr ad",
+          promo: false,
+          img: " https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
+          id: 1
+        },
+        {
+          title: "Second ad",
+          description: "Second ad",
+          promo: true,
+          img: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
+          id: 2
+        },
+        {
+          title: "Third ad",
+          description: "Third ad",
+          promo: true,
+          img: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
+          id: 3
+        },
+        {
+          title: "ad",
+          description: "ad",
+          promo: true,
+          img: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
+          id: 5
+        }
+      ]
+    };
+  }
 };
 </script>
 

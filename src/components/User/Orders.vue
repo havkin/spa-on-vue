@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col xs="12" sm="6" offset-sm="3">
+      <v-col cols="12" sm="6" offset-sm="3">
         <h1 class="text--secondary mb-3">Orders</h1>
         <v-list subheader two-line flat>
             <v-list-item v-for="order in orders" :key="order.id">
