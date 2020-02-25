@@ -36,7 +36,11 @@
           <v-switch v-model="promo" label="Add to promo?"></v-switch>
         </v-row>
         <v-row justify="end">
-          <v-btn :disabled="!valid" @click="createAd">Create ad</v-btn>
+          <v-btn 
+            :loading="loading"
+            :disabled="!valid || loading" 
+            @click="createAd"
+          >Create ad</v-btn>
         </v-row>
       </v-col>
     </v-row>
@@ -53,6 +57,11 @@ export default {
       promo: false
     };
   },
+  computed: {
+    loading() {
+      return this.$store.getters.loading;
+    }
+  },
   methods: {
     createAd() {
       if (this.valid) {
@@ -62,7 +71,11 @@ export default {
           promo: this.promo,
           img: "http://placeimg.com/640/480/any"
         };
-        this.$store.dispatch('createAd', newAd)
+        this.$store.dispatch("createAd", newAd)
+          .then(() => {
+            this.$router.push("/list");
+          })
+          .catch(() => {});;
       }
     }
   }
