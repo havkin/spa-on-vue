@@ -19,7 +19,7 @@
     </v-navigation-drawer>
 
     <v-app-bar app dense color="primary" dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon> 
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
 
       <v-toolbar-title>
         <router-link to="/" tag="span" class="pointer">Ad application</router-link>
@@ -38,22 +38,50 @@
     <v-content>
       <router-view></router-view>
     </v-content>
+    <template v-if="error">
+      <v-snackbar 
+        color="error"
+        :multi-line="true"
+        :timeout="6000"
+        @input="closeError"
+        :value="true"
+      >
+        {{ error }}
+        <v-btn 
+          dark
+          text
+          @click.native="closeError"
+        >Close</v-btn>
+      </v-snackbar>
+    </template>
   </v-app>
 </template>
 
 <script>
 export default {
   name: "App",
-  data: () => ({
-    drawer: false,
-    links: [
-      { title: "Login", icon: "lock", url: "/login" },
-      { title: "Registration", icon: "face", url: "/registration" },
-      { title: "Orders", icon: "bookmark-outline", url: "/orders" },
-      { title: "New ad", icon: "file-plus", url: "/new" },
-      { title: "My ads", icon: "format-list-bulleted", url: "/list" }
-    ]
-  })
+  data() {
+    return {
+      drawer: false,
+      links: [
+        { title: "Login", icon: "lock", url: "/login" },
+        { title: "Registration", icon: "face", url: "/registration" },
+        { title: "Orders", icon: "bookmark-outline", url: "/orders" },
+        { title: "New ad", icon: "file-plus", url: "/new" },
+        { title: "My ads", icon: "format-list-bulleted", url: "/list" }
+      ]
+    };
+  },
+  computed: {
+    error () {
+      return this.$store.getters.error
+    }
+  },
+  methods: {
+    closeError () {
+      this.$store.dispatch('clearError')
+    }
+  }
 };
 </script>
 
