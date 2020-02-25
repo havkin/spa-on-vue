@@ -44,16 +44,23 @@
 
 <script>
 export default {
-  data: () => ({
-    email: "",
-    password: "",
-    valid: false,
-    emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+/.test(v) || "E-mail must be valid"
-    ],
-    passwordRules: [v => !!v || "Password is required"]
-  }),
+  data () {
+    return {
+      email: "",
+      password: "",
+      valid: false,
+      emailRules: [
+        v => !!v || "E-mail is required",
+        v => /.+@.+/.test(v) || "E-mail must be valid"
+      ],
+      passwordRules: [v => !!v || "Password is required"]
+    }
+  },
+  created () {
+    if (this.$route.query['loginError']) {
+      this.$store.dispatch('setError', 'Please log in to access this page.')
+    }
+  },
   computed: {
     loading() {
       return this.$store.getters.loading;
