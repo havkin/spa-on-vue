@@ -20,25 +20,33 @@
           />
         </v-form>
         <v-row class="mb-6">
-          <v-btn class="ma-2 white--text warning">
+          <v-btn class="ma-2 white--text warning" @click="triggerUpload">
             Upload
             <v-icon right dark>mdi-cloud-upload</v-icon>
           </v-btn>
+          <input 
+            type="file"
+            accept="image/*"
+            class="d-none"
+            ref="fileInput"
+            @change="onFileChange"
+          >
         </v-row>
-        <v-row justify="center">
+        <v-row>
           <img
-            src="https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
+            v-if="imgSrc"
+            :src="imgSrc"
             alt="ad preview"
             height="100"
           />
         </v-row>
-        <v-row justify="center">
+        <v-row>
           <v-switch v-model="promo" label="Add to promo?"></v-switch>
         </v-row>
         <v-row justify="end">
           <v-btn 
             :loading="loading"
-            :disabled="!valid || loading" 
+            :disabled="!valid || !imgSrc || loading" 
             @click="createAd"
           >Create ad</v-btn>
         </v-row>
@@ -54,7 +62,9 @@ export default {
       valid: false,
       title: "",
       description: "",
-      promo: false
+      promo: false,
+      imgFile: null,
+      imgSrc: ''
     };
   },
   computed: {
@@ -64,12 +74,12 @@ export default {
   },
   methods: {
     createAd() {
-      if (this.valid) {
+      if (this.valid && this.imgFile) {
         const newAd = {
           title: this.title,
           description: this.description,
           promo: this.promo,
-          img: "http://placeimg.com/640/480/any"
+          img: this.imgFile
         };
         this.$store.dispatch("createAd", newAd)
           .then(() => {
@@ -77,6 +87,22 @@ export default {
           })
           .catch(() => {});;
       }
+    },
+    triggerUpload () {
+      this.$refs.fileInput.click()
+    },
+    onFileChange () {
+      const file = event.target.files[0]
+
+      const reader = new FileReader()
+      reader.onload = () => {
+        this.imgSrc = reader.result
+        // console.log(this.imgSrc)
+      }
+
+      reader.readAsDataURL(file)
+      this.imgFile = file
+
     }
   }
 };

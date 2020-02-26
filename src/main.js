@@ -13,14 +13,14 @@ new Vue({
   vuetify,
   created() {
     var firebaseConfig = {
-      apiKey: "AIzaSyBBg0sQdo931tS4aXNBRw8ZNgZy_sclCtc",
-      authDomain: "ad-project-8db0d.firebaseapp.com",
-      databaseURL: "https://ad-project-8db0d.firebaseio.com",
-      projectId: "ad-project-8db0d",
-      storageBucket: "ad-project-8db0d.appspot.com",
-      messagingSenderId: "936499911340",
-      appId: "1:936499911340:web:adcd73a4a2526c3df3dd09",
-      measurementId: "G-9V7BTWY1TL"
+      apiKey: "AIzaSyCPOSRfNY4pb_JVrHqx6gXFqie5u02D-Eg",
+      authDomain: "ads-project-1e8d0.firebaseapp.com",
+      databaseURL: "https://ads-project-1e8d0.firebaseio.com",
+      projectId: "ads-project-1e8d0",
+      storageBucket: "ads-project-1e8d0.appspot.com",
+      messagingSenderId: "260060060219",
+      appId: "1:260060060219:web:c20b8e4f0d787488371a1e",
+      measurementId: "G-NWE3BG8JL3"
     };
     fb.initializeApp(firebaseConfig);
     fb.analytics();

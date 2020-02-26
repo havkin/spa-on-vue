@@ -28,25 +28,41 @@ export default ({
          commit('clearError');
          commit('setLoading', true);
 
+         const imgFile = payload.img;
+
          try {
             const newAd = new Ad(
                payload.title,
                payload.description,
                getters.user.id,
-               payload.img,
+               "",
                payload.promo
             );
             const ad = await fb.database().ref('ads').push(newAd);
+
+            const imgFileExt = imgFile.name.slice(imgFile.name.lastIndexOf('.'));
             
+            const imgRef = `ads/${ad.key}${imgFileExt}`;
+
+            const fileData = await fb.storage().ref(imgRef).put(imgFile);
+
+            const imageSrc = await fileData.ref.getDownloadURL();
+
+            await fb.database().ref('ads').child(ad.key).update({
+               img: imageSrc
+            });
+
             commit('createAd', {
                ...newAd,
-               id: ad.key
+               id: ad.key,
+               img: imageSrc
             });
             commit('setLoading', false);
             
          } catch (error) {
             commit('setLoading', false);
             commit('setError', error.message);
+            // console.log(error);
             throw error;
          }
       },
