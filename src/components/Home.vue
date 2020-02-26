@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <v-container fluid>
       <v-row>
         <v-col>
@@ -37,22 +37,35 @@
       </v-row>
     </v-container>
   </div>
+  <div v-else>
+    <v-container>
+      <v-row align="center" justify="center" style="height: 100vh;">
+          <v-progress-circular 
+            :size="70"
+            :width="7"
+            color="primary"
+            indeterminate>
+            </v-progress-circular>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-      
-    };
+    return {};
   },
 
   computed: {
-    promoAds () {
-      return this.$store.getters.promoAds
+    promoAds() {
+      return this.$store.getters.promoAds;
     },
-    ads () {
-      return this.$store.getters.ads
+    ads() {
+      return this.$store.getters.ads;
+    },
+    loading() {
+      return this.$store.getters.loading;
     }
   }
 };
