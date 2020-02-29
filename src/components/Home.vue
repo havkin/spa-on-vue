@@ -30,7 +30,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn text :to="'/ad/' + item.id">Open</v-btn>
-              <v-btn text class="primary">Buy</v-btn>
+              <app-buy-modal :ad="item"></app-buy-modal>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {};
@@ -67,7 +68,7 @@ export default {
     loading() {
       return this.$store.getters.loading;
     }
-  }
+  },
 };
 </script>
 

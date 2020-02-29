@@ -11,7 +11,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <editAdModal :ad="ad" v-if="isOwner"></editAdModal>
-            <v-btn class="success">Buy</v-btn>
+            <app-buy-modal :ad="ad"></app-buy-modal>
           </v-card-actions>
         </v-card>
         <div v-else>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import editAdModal from "./editAdModal";
+import editAdModal from "./EditAdModal";
 
 export default {
   props: ["id"],
