@@ -18,7 +18,12 @@
     </v-container>
     <v-container>
       <v-row>
-        <v-col v-for="item in ads" :key="item.id" cols="12" lg="4">
+        <v-col
+           v-for="item in ads"
+           :key="item.id"
+           cols="12"
+           lg="4"
+        >
           <v-card class="mx-auto" max-width="400">
             <v-img class="white--text align-end" height="200px" :src="item.img"></v-img>
             <v-card-title>{{item.title}}</v-card-title>
@@ -30,7 +35,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn text :to="'/ad/' + item.id">Open</v-btn>
-              <app-buy-modal :ad="item"></app-buy-modal>
+              <app-buy-modal :ad="item" v-if="item.ownerId !== userId"></app-buy-modal>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -67,6 +72,18 @@ export default {
     },
     loading() {
       return this.$store.getters.loading;
+    },
+    userId() {
+      if (this.$store.getters.user) {
+        return this.$store.getters.user.id;
+      } 
+    },
+    isOwner() {
+      if (this.$store.getters.user) {
+        return this.ad.ownerId === this.$store.getters.user.id;
+      } else {
+        return false;
+      }
     }
   },
 };

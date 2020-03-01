@@ -11,7 +11,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <editAdModal :ad="ad" v-if="isOwner"></editAdModal>
-            <app-buy-modal :ad="ad"></app-buy-modal>
+            <app-buy-modal :ad="ad" v-if="!isOwner"></app-buy-modal>
           </v-card-actions>
         </v-card>
         <div v-else>
@@ -38,7 +38,11 @@ export default {
       return this.$store.getters.loading;
     },
     isOwner() {
-      return this.ad.ownerId === this.$store.getters.user.id;
+      if (this.$store.getters.user) {
+        return this.ad.ownerId === this.$store.getters.user.id;
+      } else {
+        return false;
+      }
     }
   },
   components: {
